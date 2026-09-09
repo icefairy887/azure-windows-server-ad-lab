@@ -1,0 +1,5 @@
+Name,SamAccountName,Scope,Category,Description,Path
+Brookelab IT,GG-IT,Global,Security,Fictional IT lab group,"OU=Groups,{LAB_ROOT_DN}"
+Brookelab HR,GG-HR,Global,Security,Fictional HR lab group,"OU=Groups,{LAB_ROOT_DN}"
+Brookelab Finance,GG-Finance,Global,Security,Fictional finance lab group,"OU=Groups,{LAB_ROOT_DN}"
+

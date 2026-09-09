@@ -1,0 +1,85 @@
+AZURE ACTIVE DIRECTORY LAB - REVIEW NOTES
+=========================================
+
+CURRENT STOP POINT
+------------------
+The repository scaffold is complete.
+No Azure resource was created, changed, started, or deleted by this repository update.
+No Active Directory command was executed.
+
+PART 1 - PROJECT SAFETY
+-----------------------
+README.md explains the lab, file map, order, and deployment boundary.
+SECURITY.md lists data that must never be committed.
+.gitignore blocks common secrets and local output.
+AGENTS.md tells coding agents to review only and not deploy automatically.
+
+PART 2 - CENTRAL CONFIGURATION
+------------------------------
+config/lab.config.psd1 holds planned names, CIDRs, VM size, image, domain, and OU values.
+Review this file before any Azure work.
+
+PART 3 - AZURE POWERSHELL
+-------------------------
+01-create-resource-group.ps1  Plans the resource group.
+02-create-network.ps1         Plans the VNet and AD subnet.
+03-create-nsg.ps1             Requires a current public IPv4 at run time and limits RDP to /32.
+04-create-public-ip.ps1       Plans a standard static public IP resource.
+05-create-nic.ps1             Joins subnet, NSG, and public IP to one NIC.
+06-set-static-private-ip.ps1  Reserves 10.10.1.4 on the Azure NIC.
+07-create-dc01-vm.ps1         Builds the Windows Server VM configuration and requires a credential.
+
+These scripts are present for review. They were not run.
+
+PART 4 - WINDOWS SERVER AND ACTIVE DIRECTORY
+--------------------------------------------
+01-rename-server.ps1          Renames the guest to DC01.
+02-install-adds-role.ps1      Installs the AD DS role and tools.
+03-create-forest.ps1          Creates corp.brookelab.test and requests DSRM password securely.
+04-create-ous.ps1             Creates the Brookelab OU tree.
+05-create-groups.ps1          Imports fake security groups from CSV.
+06-create-users.ps1           Imports fake users and requires a secure temporary password.
+07-add-users-to-groups.ps1    Applies fake membership mappings.
+08-create-gpos.ps1            Creates empty GPOs; links are opt-in.
+09-validate-ad.ps1            Reads and reports domain, forest, DC, OU, DNS, and GPO state.
+
+PART 5 - SAMPLE DATA
+--------------------
+groups.sample.csv, users.sample.csv, and memberships.sample.csv contain fictional lab records only.
+No password is stored in CSV.
+
+PART 6 - DOCUMENTATION
+----------------------
+docs/01-architecture.md          Design and boundaries.
+docs/02-azure-infrastructure.md  Azure order, requirements, and cost warning.
+docs/03-windows-server.md        Guest configuration plan.
+docs/04-active-directory.md      Forest and OU plan.
+docs/05-users-groups-ous.md      Identity automation plan.
+docs/06-group-policy.md          Safe GPO behavior.
+docs/07-validation.md            Offline and later live checks.
+docs/troubleshooting.md          Real errors already encountered and their resolutions.
+
+PART 7 - OPTIONAL AI REVIEW PLUG-INS
+------------------------------------
+AGENTS.md                         Codex and agent-aware tool context.
+.github/copilot-instructions.md  GitHub Copilot context.
+.opencode/commands/review.md      OpenCode /review command.
+.continue/rules/lab-safety.md    Continue safety rule.
+integrations/                     Generic context, prompt, and disabled adapter examples.
+
+No provider is enabled. No API key is included. No LLM call happens automatically.
+
+PART 8 - OFFLINE CHECKS
+-----------------------
+powershell/tests/Test-Repository.ps1 parses scripts and checks structure without contacting Azure.
+.github/workflows/offline-validation.yml runs the same offline test on GitHub pushes and pull requests.
+tools/Export-ReviewBundle.ps1 creates one review-bundle.txt file for Notepad or another LLM.
+
+NEXT ACTION LATER
+-----------------
+1. Read this file.
+2. Review config/lab.config.psd1.
+3. Run powershell/tests/Test-Repository.ps1 locally.
+4. Check current Azure region and VM SKU availability.
+5. Only then begin Azure script 01, one script at a time.
+

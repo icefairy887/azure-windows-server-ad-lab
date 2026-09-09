@@ -1,0 +1,20 @@
+name: Offline repository validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Parse scripts and check repository structure
+        shell: pwsh
+        run: ./powershell/tests/Test-Repository.ps1
+

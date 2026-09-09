@@ -1,0 +1,27 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*.cer
+*.secret
+secrets/
+credentials/
+config/lab.config.local.psd1
+
+# PowerShell local output
+*.clixml
+*.transcript.txt
+*.log
+
+# Generated review bundles
+review-bundle.txt
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,5 @@
+DisplayName,GivenName,Surname,SamAccountName,Department,Title,Path
+Avery Stone,Avery,Stone,astone,IT,Support Specialist,"OU=Users,{LAB_ROOT_DN}"
+Casey Rivers,Casey,Rivers,crivers,HR,HR Coordinator,"OU=Users,{LAB_ROOT_DN}"
+Jordan Vale,Jordan,Vale,jvale,Finance,Financial Analyst,"OU=Users,{LAB_ROOT_DN}"
+

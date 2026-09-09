@@ -1,0 +1,27 @@
+{
+  "enabled": false,
+  "notes": "Examples only. Copy to a local ignored configuration before editing.",
+  "adapters": [
+    {
+      "name": "Codex CLI",
+      "type": "command",
+      "command": "codex",
+      "enabled": false
+    },
+    {
+      "name": "OpenCode",
+      "type": "command",
+      "command": "opencode",
+      "enabled": false
+    },
+    {
+      "name": "OpenAI-compatible local endpoint",
+      "type": "http",
+      "baseUrl": "http://localhost:11434/v1",
+      "model": "CHANGE_ME",
+      "apiKeyEnvironmentVariable": "LLM_API_KEY",
+      "enabled": false
+    }
+  ]
+}
+
