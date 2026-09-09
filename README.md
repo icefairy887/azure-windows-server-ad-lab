@@ -1,3 +1,4 @@
+![Azure Windows Server AD Lab](azure-windows-server-ad-lab-banner.jpg)
 # Azure Active Directory Lab
 
 A portfolio lab for building an Azure-hosted Windows Server domain with PowerShell.
