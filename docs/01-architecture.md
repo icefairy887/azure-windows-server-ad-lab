@@ -189,10 +189,40 @@ Deployed a Python Flask application to Azure App Service using Azure CLI.
 
 ### Objective 2 — Security and Compliance
 
-* [ ] Configure Entra ID access
-* [ ] Configure RBAC
-* [ ] Enable MFA
-* [ ] Add Key Vault
-* [ ] Verify encryption
+* [x] Configure Entra ID access
+* [x] Configure RBAC
+* [x] Enable MFA
+* [x] Enable MFA
+* [x] Add Key Vault
+* [x] Verify encryption
 * [ ] Enable logging
 * [ ] Review Defender for Cloud
+
+**Updated:** September 10, 2026
+
+- [x] Configure Entra ID access
+  - Created `grp-adlab-admins`
+  - Added Brooke Rayner as member
+
+- [x] Configure RBAC
+  - Assigned `Contributor` to `grp-adlab-admins`
+  - Scope = `rg-adlab`
+
+- [x] Enable MFA
+  - MFA enabled for Entra user
+
+- [x] Add Key Vault
+  - Created `kv-adlab-brooke01`
+  - Permission model = Azure RBAC
+
+- [x] Verify encryption
+  - `vm-workload01` OS disk uses `SSE with PMK`
+  - Azure encrypts disk data at rest with a platform-managed key
+
+- [ ] Enable logging
+  - Created `law-adlab` Log Analytics workspace
+  - App Service diagnostic logs configured to send to `law-adlab`
+  - Installed `AzureMonitorWindowsAgent` on `vm-workload01`
+  - VM Data Collection Rule setup started but is not complete yet
+
+- [ ] Review Defender for Cloud
