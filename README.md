@@ -1,86 +1,155 @@
 ![Azure Windows Server AD Lab](azure-windows-server-ad-lab-banner.jpg)
-# Azure Active Directory Lab
 
-A portfolio lab for building an Azure-hosted Windows Server domain with PowerShell.
+# Azure Windows Server + Active Directory Cloud Lab
 
-## Current status
+A hands-on Azure infrastructure lab demonstrating Windows Server, IaaS, PaaS, networking, identity, RBAC, security, encryption, monitoring, and Active Directory concepts.
 
-**Repository scaffold complete. Azure deployment intentionally not started by this repository update.**
+## Current Status
 
-The scripts are ready for manual review. Nothing in this repository runs automatically, and no workflow deploys resources.
+### Objective 1 — IaaS and PaaS
+- [x] Add workload subnet
+- [x] Build Windows VM as IaaS
+- [x] Configure NSG rules
+- [x] Deploy Azure App Service as PaaS
 
-## Planned environment
+### Objective 2 — Security and Compliance
+- [x] Configure Microsoft Entra ID access
+- [x] Configure RBAC
+- [x] Enable MFA
+- [x] Add Azure Key Vault
+- [x] Verify VM disk encryption
+- [ ] Finish centralized VM logging
+- [ ] Review Microsoft Defender for Cloud
 
-| Component | Planned value |
+## Environment
+
+| Component | Current value |
 |---|---|
-| Azure region | Central US |
 | Resource group | `rg-adlab` |
-| Virtual network | `vnet-adlab` (`10.10.0.0/16`) |
-| AD subnet | `snet-ad` (`10.10.1.0/24`) |
-| Domain controller | `DC01` |
-| Private IP | `10.10.1.4` |
-| AD DNS domain | `corp.brookelab.test` |
-| NetBIOS name | `BROOKELAB` |
+| Original Azure VNet | `vnet-adlab` |
+| AD subnet | `snet-ad` |
+| Workload VM | `vm-workload01` |
+| VM operating system | Windows Server 2025 Datacenter: Azure Edition |
+| VM region | Belgium Central |
+| VM security group | `vm-workload01-nsg` |
+| App Service | `app-adlab-workload01` |
+| App Service runtime | Python 3.12 / Linux |
+| App Service region | Belgium Central |
+| Entra security group | `grp-adlab-admins` |
+| Key Vault | `kv-adlab-brooke01` |
+| Log Analytics workspace | `law-adlab` |
+| Log Analytics region | Canada Central |
 
-## What is included
+## Architecture Work Completed
 
-- Reusable Azure infrastructure scripts
-- Windows Server and Active Directory setup scripts
-- Example users, groups, and memberships with fake data only
-- Group Policy creation and validation templates
-- Written documentation for every project stage
-- Troubleshooting and security notes
-- Neutral hooks for Codex, OpenCode, Copilot, Continue, or another LLM
-- A review-bundle exporter that produces one Notepad-friendly text file
+### Networking
+- Created Azure virtual networking for the lab
+- Created separate AD and workload subnet designs
+- Configured NAT Gateway resources for controlled outbound connectivity
+- Configured Network Security Groups
+- Restricted VM RDP access with a custom inbound rule
 
-## Repository map
+### IaaS
+Deployed `vm-workload01` as the Windows Server IaaS workload.
+
+The VM provides hands-on experience with:
+
+- Windows Server administration
+- Azure virtual machines
+- Network interfaces
+- NSGs
+- Managed disks
+- Azure Monitor
+- PowerShell
+- Cloud infrastructure troubleshooting
+
+### PaaS
+Deployed `app-adlab-workload01` using Azure App Service.
+
+A Python Flask application was packaged and deployed through Azure CLI and verified successfully in a browser.
+
+Example application output:
 
 ```text
-config/                    Lab settings used by the scripts
-data/                      Fake CSV input examples
-docs/                      Build and design documentation
-integrations/              Optional AI-tool context and adapter examples
-powershell/azure/          Azure resource templates
-powershell/active-directory/ Windows Server and AD templates
-powershell/tests/          Offline repository checks
-review-notes/              Plain-text review notes
-screenshots/               Milestone evidence added during the real build
-tools/                     Local helper tools
-```
+Azure App Service PaaS lab is working.
 
-## Review before using Azure
+Identity and Access
+Created Entra security group grp-adlab-admins
+Added the lab administrator account to the group
+Assigned the Contributor RBAC role to the group at rg-adlab
+Enabled MFA
+Used group-based access instead of assigning permissions only to individual users
+Security and Data Protection
+Created Azure Key Vault
+Configured Key Vault to use Azure RBAC
+Verified the Windows VM OS disk uses server-side encryption
+Encryption uses an Azure platform-managed key
+Restricted inbound VM administration traffic with NSG rules
+Monitoring and Logging
+Created Log Analytics workspace law-adlab
+Connected App Service diagnostic logs to Log Analytics
+Enabled App Service HTTP, application, console, audit, platform, and authentication logs
+Installed AzureMonitorWindowsAgent on vm-workload01
+VM Data Collection Rule configuration is still being completed
+Repository Map
+app-service-demo/           Python Flask PaaS demo
+config/                     Lab configuration
+data/                       Fake lab data
+docs/                       Architecture and build documentation
+integrations/               Optional AI-tool integration notes
+powershell/azure/           Azure infrastructure scripts
+powershell/active-directory/ Windows Server / AD scripts
+powershell/tests/           Repository validation
+review-notes/               Review notes
+screenshots/                Build and verification evidence
+tools/                      Local helper tools
+Evidence
 
-1. Open [`review-notes/REVIEW_NOTES.txt`](review-notes/REVIEW_NOTES.txt) in Notepad.
-2. Review [`config/lab.config.psd1`](config/lab.config.psd1).
-3. Run the offline repository test:
+The screenshots/ directory contains evidence from the real Azure build, including:
 
-   ```powershell
-   ./powershell/tests/Test-Repository.ps1
-   ```
-
-4. Read [`docs/02-azure-infrastructure.md`](docs/02-azure-infrastructure.md).
-5. When you are ready later, run Azure scripts one at a time in numeric order.
-
-## Safety rules
-
-- Never commit passwords, public home IP addresses, tokens, tenant IDs, or subscription IDs.
-- The RDP source IP must be provided at run time.
-- Scripts do not call `Connect-AzAccount` or sign in for you.
-- VM and AD changes require explicit manual execution.
-- Use `-WhatIf` where the script supports it.
-- Stop the VM when it is not being used to control student-subscription costs.
-
-## Optional AI review tools
-
-AI tools are not required and are disabled by default. See [`integrations/README.md`](integrations/README.md). The repository contains instruction files and example adapter settings, but no API key and no automatic LLM call.
-
-## Planned build order
-
-1. Review and validate the repository locally.
-2. Build Azure networking and the VM.
-3. Configure Windows Server.
-4. Create the forest and directory structure.
-5. Add fake lab identities and groups.
-6. Create and test Group Policy.
-7. Capture milestone screenshots and validation output.
-
+NAT Gateway deployment
+Workload subnet configuration
+Windows Server VM deployment
+NSG configuration
+App Service deployment
+Azure CLI deployment output
+Running Flask application
+Entra group configuration
+RBAC assignments
+Key Vault deployment
+Disk encryption
+Monitoring and logging configuration
+Skills Demonstrated
+Azure IaaS
+Azure PaaS
+Windows Server
+Microsoft Entra ID
+Azure RBAC
+Network Security Groups
+Virtual Networks and subnets
+NAT Gateway
+Azure Key Vault
+MFA
+Managed disk encryption
+Azure App Service
+Python / Flask
+Azure CLI
+PowerShell
+Azure Monitor
+Log Analytics
+Cloud security and access control
+Infrastructure troubleshooting
+Safety Rules
+Never commit passwords, tokens, public home IP addresses, tenant IDs, or subscription IDs.
+Redact sensitive information from screenshots before committing them.
+Do not expose RDP broadly to the internet.
+Use restricted NSG source addresses for administrative access.
+Stop or deallocate lab resources when they are not needed.
+Keep production credentials and secrets out of the repository.
+Remaining Work
+Finish VM Data Collection Rule configuration.
+Verify VM logs are flowing into law-adlab.
+Review Microsoft Defender for Cloud.
+Continue Windows Server / Active Directory configuration.
+Add directory users, groups, and Group Policy testing.
+Add final architecture diagrams and validation screenshots.
